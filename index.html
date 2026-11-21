@@ -5,15 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tarık Cinetci — Uygulamalar</title>
 <meta name="description" content="Tarık Cinetci tarafından geliştirilen iPhone, iPad, Mac ve Apple TV uygulamaları.">
-<meta property="og:title" content="Tarık Cinetci — Uygulamalar">
-<meta property="og:description" content="iPhone, iPad, Mac ve Apple TV için özenle tasarlanmış uygulamalar.">
+<meta property="og:title" content="Tarık Cinetci — Apps">
+<meta property="og:description" content="iPhone, iPad, Mac & Apple TV apps by Tarık Cinetci.">
+<link rel="alternate" hreflang="tr" href="https://tarikcinetci.github.io/apps/?lang=tr">
+<link rel="alternate" hreflang="en" href="https://tarikcinetci.github.io/apps/?lang=en">
+<link rel="alternate" hreflang="ja" href="https://tarikcinetci.github.io/apps/?lang=ja">
+<link rel="alternate" hreflang="ko" href="https://tarikcinetci.github.io/apps/?lang=ko">
+<link rel="alternate" hreflang="zh-Hans" href="https://tarikcinetci.github.io/apps/?lang=zh">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0c0b10;
-    --bg2: #15131c;
     --card: rgba(255,255,255,.045);
     --card-hover: rgba(255,255,255,.075);
     --border: rgba(255,255,255,.09);
@@ -24,18 +28,23 @@
     --rose: #f08aa8;
     --violet: #9a8cff;
     --teal: #6fd6c4;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "PingFang SC", "Apple SD Gothic Neo", "Noto Sans CJK JP", "Microsoft YaHei", "Malgun Gothic", sans-serif;
+    --serif: "Fraunces", "Hiragino Mincho ProN", "Songti SC", "AppleMyungjo", "Noto Serif CJK JP", serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--sans);
     line-height: 1.55;
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
+  :lang(ja) body, :lang(ko) body, :lang(zh) body { line-height: 1.7; }
+  :lang(ja) h1, :lang(ko) h1, :lang(zh) h1 { letter-spacing: 0; }
+  :lang(ko) p, :lang(ko) h3 { word-break: keep-all; }
 
   /* ---------- dekor ---------- */
   .aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
@@ -57,14 +66,37 @@
   .stars { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
   .stars i {
     position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff;
-    opacity: .0; animation: twinkle 5s ease-in-out infinite;
+    opacity: 0; animation: twinkle 5s ease-in-out infinite;
   }
   @keyframes twinkle { 50% { opacity: .7; } }
 
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
+  /* ---------- dil seçici ---------- */
+  .topbar { display: flex; justify-content: flex-end; padding-top: 20px; }
+  .lang {
+    position: relative; display: inline-flex; align-items: center; gap: 8px;
+    padding: 0 14px; height: 38px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--card);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    color: var(--text); font-size: 14px; font-weight: 500;
+    transition: background .2s, border-color .2s;
+  }
+  .lang:hover, .lang:focus-within { background: var(--card-hover); border-color: rgba(255,255,255,.2); }
+  .lang svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted); }
+  .lang select {
+    appearance: none; -webkit-appearance: none; background: transparent; border: 0;
+    color: inherit; font: inherit; cursor: pointer; padding-right: 18px; outline: none;
+  }
+  .lang select option { background: #1b1924; color: var(--text); }
+  .lang::after {
+    content: ""; position: absolute; right: 14px; top: 50%; width: 6px; height: 6px;
+    border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted);
+    transform: translateY(-70%) rotate(45deg); pointer-events: none;
+  }
+
   /* ---------- hero ---------- */
-  header.hero { padding: 96px 0 56px; text-align: center; }
+  header.hero { padding: 56px 0 56px; text-align: center; }
   .monogram {
     width: 84px; height: 84px; margin: 0 auto 26px; border-radius: 26px;
     display: grid; place-items: center;
@@ -80,14 +112,15 @@
   }
   .eyebrow::before, .eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .5; }
   h1 {
-    font-family: "Fraunces", serif; font-weight: 500;
-    font-size: clamp(38px, 7vw, 68px); line-height: 1.05; letter-spacing: -.02em;
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(38px, 7vw, 68px); line-height: 1.1; letter-spacing: -.02em;
   }
   h1 em {
     font-style: italic;
     background: linear-gradient(90deg, var(--gold), var(--rose), var(--violet));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
+  :lang(ja) h1 em, :lang(ko) h1 em, :lang(zh) h1 em { font-style: normal; }
   .lead { max-width: 560px; margin: 20px auto 0; color: var(--muted); font-size: 17px; }
   .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
   .chip {
@@ -112,7 +145,7 @@
     display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
     margin-bottom: 24px; flex-wrap: wrap;
   }
-  .section-title h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 30px; }
+  .section-title h2 { font-family: var(--serif); font-weight: 500; font-size: 30px; }
   .section-title p { color: var(--faint); font-size: 14px; }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; }
@@ -187,7 +220,7 @@
   .sign { font-family: "Fraunces", serif; font-style: italic; color: var(--muted); font-size: 16px; }
 
   @media (max-width: 520px) {
-    header.hero { padding-top: 64px; }
+    header.hero { padding-top: 40px; }
     .grid { grid-template-columns: 1fr; }
     .stats { gap: 28px; }
   }
@@ -203,37 +236,50 @@
 <div class="grain"></div>
 
 <div class="wrap">
+  <div class="topbar">
+    <label class="lang">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      <select id="lang-select" aria-label="Language">
+        <option value="tr">Türkçe</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="zh">简体中文</option>
+      </select>
+    </label>
+  </div>
+
   <header class="hero">
     <div class="monogram">T</div>
-    <div class="eyebrow">Bağımsız geliştirici</div>
-    <h1>Tarık Cinetci'nin<br><em>uygulamaları</em></h1>
-    <p class="lead">iPhone, iPad, Mac ve Apple TV için özenle tasarlanmış, sade ve keyifli uygulamalar. Hepsi tek yerde.</p>
+    <div class="eyebrow" data-i18n="eyebrow"></div>
+    <h1 data-i18n-html="h1"></h1>
+    <p class="lead" data-i18n="lead"></p>
     <div class="chips">
-      <a class="chip" href="https://apps.apple.com/tr/developer/tarik-cinetci/id6819027707" target="_blank" rel="noopener">
+      <a class="chip" id="dev-link" href="https://apps.apple.com/developer/tarik-cinetci/id6819027707" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.77-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.55.02-2.97.9-3.77 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.51 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.1 5.86c.63-.77 1.06-1.83.94-2.9-.91.04-2.02.61-2.67 1.37-.58.68-1.1 1.77-.96 2.81 1.02.08 2.06-.52 2.69-1.28z"/></svg>
-        App Store'da tümü
+        <span data-i18n="all"></span>
       </a>
-      <a class="chip" href="https://github.com/TarikCinetci" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
-        GitHub
+      <a class="chip" href="https://www.instagram.com/tarik.codes/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>
+        @tarik.codes
       </a>
       <a class="chip" href="mailto:tcinetci@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-        İletişim
+        <span data-i18n="contact"></span>
       </a>
     </div>
   </header>
 
   <div class="stats">
-    <div><b id="stat-apps">5</b>yayında uygulama</div>
-    <div><b>4</b>Apple platformu</div>
-    <div><b>%100</b>ücretsiz indirme</div>
+    <div><b id="stat-apps">5</b><span data-i18n="statLive"></span></div>
+    <div><b>4</b><span data-i18n="statPlatforms"></span></div>
+    <div><b data-i18n="statFreeNum"></b><span data-i18n="statFree"></span></div>
   </div>
 
   <section id="apps">
     <div class="section-title">
-      <h2>Uygulamalar</h2>
-      <p>App Store'da yayında</p>
+      <h2 data-i18n="section"></h2>
+      <p data-i18n="sectionSub"></p>
     </div>
     <div class="grid" id="grid"></div>
   </section>
@@ -245,102 +291,244 @@
 </div>
 
 <script>
-  /* ====== Uygulama listesi — yeni uygulama eklemek için bir blok kopyala ====== */
+  /* ====== Arayüz metinleri ====== */
+  const UI = {
+    tr: {
+      title: "Tarık Cinetci — Uygulamalar",
+      meta: "Tarık Cinetci tarafından geliştirilen iPhone, iPad, Mac ve Apple TV uygulamaları.",
+      eyebrow: "Bağımsız geliştirici",
+      h1: "Tarık Cinetci'nin<br><em>uygulamaları</em>",
+      lead: "iPhone, iPad, Mac ve Apple TV için özenle tasarlanmış, sade ve keyifli uygulamalar. Hepsi tek yerde.",
+      all: "App Store'da tümü", contact: "İletişim",
+      statLive: "yayında uygulama", statPlatforms: "Apple platformu", statFreeNum: "%100", statFree: "ücretsiz indirme",
+      section: "Uygulamalar", sectionSub: "App Store'da yayında",
+      download: "İndir", soon: "Yakında", support: "Destek", privacy: "Gizlilik", website: "Web sitesi",
+      icon: "ikonu"
+    },
+    en: {
+      title: "Tarık Cinetci — Apps",
+      meta: "iPhone, iPad, Mac and Apple TV apps made by Tarık Cinetci.",
+      eyebrow: "Independent developer",
+      h1: "Apps by<br><em>Tarık Cinetci</em>",
+      lead: "Simple, delightful apps carefully crafted for iPhone, iPad, Mac and Apple TV. All in one place.",
+      all: "All on the App Store", contact: "Contact",
+      statLive: "apps live", statPlatforms: "Apple platforms", statFreeNum: "100%", statFree: "free to download",
+      section: "Apps", sectionSub: "Available on the App Store",
+      download: "Download on the", soon: "Coming soon", support: "Support", privacy: "Privacy", website: "Website",
+      icon: "icon"
+    },
+    ja: {
+      title: "Tarık Cinetci — アプリ",
+      meta: "Tarık Cinetci が開発した iPhone・iPad・Mac・Apple TV 向けアプリ。",
+      eyebrow: "個人開発者",
+      h1: "Tarık Cinetci の<br><em>アプリ</em>",
+      lead: "iPhone、iPad、Mac、Apple TV のために丁寧に作った、シンプルで心地よいアプリたち。すべてここにまとめています。",
+      all: "App Store ですべて見る", contact: "お問い合わせ",
+      statLive: "公開中のアプリ", statPlatforms: "Apple プラットフォーム", statFreeNum: "100%", statFree: "無料ダウンロード",
+      section: "アプリ", sectionSub: "App Store で配信中",
+      download: "ダウンロード", soon: "近日公開", support: "サポート", privacy: "プライバシー", website: "ウェブサイト",
+      icon: "アイコン"
+    },
+    ko: {
+      title: "Tarık Cinetci — 앱",
+      meta: "Tarık Cinetci가 만든 iPhone, iPad, Mac, Apple TV 앱.",
+      eyebrow: "인디 개발자",
+      h1: "Tarık Cinetci의<br><em>앱</em>",
+      lead: "iPhone, iPad, Mac, Apple TV를 위해 정성껏 만든 심플하고 즐거운 앱들. 모두 한곳에 모았습니다.",
+      all: "App Store에서 전체 보기", contact: "문의하기",
+      statLive: "출시된 앱", statPlatforms: "Apple 플랫폼", statFreeNum: "100%", statFree: "무료 다운로드",
+      section: "앱", sectionSub: "App Store에서 만나보세요",
+      download: "다운로드", soon: "출시 예정", support: "지원", privacy: "개인정보", website: "웹사이트",
+      icon: "아이콘"
+    },
+    zh: {
+      title: "Tarık Cinetci — 应用",
+      meta: "Tarık Cinetci 开发的 iPhone、iPad、Mac 和 Apple TV 应用。",
+      eyebrow: "独立开发者",
+      h1: "Tarık Cinetci 的<br><em>应用</em>",
+      lead: "为 iPhone、iPad、Mac 和 Apple TV 精心打造的简洁、愉悦的应用，全部汇集于此。",
+      all: "在 App Store 查看全部", contact: "联系我",
+      statLive: "款已上架应用", statPlatforms: "个 Apple 平台", statFreeNum: "100%", statFree: "免费下载",
+      section: "应用", sectionSub: "已在 App Store 上架",
+      download: "下载", soon: "即将推出", support: "支持", privacy: "隐私政策", website: "网站",
+      icon: "图标"
+    }
+  };
+
+  /* ====== Uygulama listesi — yeni uygulama eklemek için bir blok kopyala ======
+     store: App Store kimliği (id) — boş bırakırsan "Yakında" görünür.
+     links: [metin anahtarı, adres] — anahtar: support / privacy / website      */
   const apps = [
     {
       name: "BloomTask",
-      tag: "Verimlilik",
       accent: "#f08aa8",
       icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/55/62/e0/5562e006-d23b-cf3d-7947-eee3b50226df/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/512x512bb.jpg",
-      desc: "Yapılacaklar listeni sevimli bir dünyaya dönüştür. Bitirdiğin her görev minik dostunu besler ve büyütür — suçluluk yok, sadece nazik ilerleme.",
+      store: "6837660784",
       platforms: ["iPhone", "iPad", "Widget"],
-      store: "https://apps.apple.com/tr/app/bloomtask-cute-to-do-focus/id6837660784",
-      links: [["Destek", "https://tarikcinetci.github.io/BloomTask-legal/support.html"], ["Gizlilik", "https://tarikcinetci.github.io/BloomTask-legal/privacy.html"]]
+      tag:  { tr: "Verimlilik", en: "Productivity", ja: "仕事効率化", ko: "생산성", zh: "效率" },
+      desc: {
+        tr: "Yapılacaklar listeni sevimli bir dünyaya dönüştür. Bitirdiğin her görev minik dostunu besler ve büyütür — suçluluk yok, sadece nazik ilerleme.",
+        en: "Turn your to-do list into a cozy little world. Every task you finish feeds your companion and helps them grow — no guilt, just gentle progress.",
+        ja: "ToDoリストを、かわいい小さな世界に。タスクを終えるたびに相棒がごはんを食べて成長します。罪悪感なし、やさしく前進。",
+        ko: "할 일 목록을 아늑하고 귀여운 세상으로 바꿔 보세요. 할 일을 끝낼 때마다 작은 친구가 밥을 먹고 자라요. 죄책감 없이, 부드럽게 한 걸음씩.",
+        zh: "把待办清单变成一个温馨可爱的小世界。每完成一项任务，你的小伙伴就会吃饱长大——没有负罪感，只有温柔的进步。"
+      },
+      links: [["support", "https://tarikcinetci.github.io/BloomTask-legal/support.html"], ["privacy", "https://tarikcinetci.github.io/BloomTask-legal/privacy.html"]]
     },
     {
       name: "IPTV Premium",
-      tag: "Eğlence",
       accent: "#9a8cff",
       icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/db/76/32/db76324f-89e6-c75a-3097-9e6d97396623/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
-      desc: "Kendi IPTV aboneliğindeki canlı kanallar, filmler ve dizilere sinematik bir his katan şık ve hızlı oynatıcı.",
+      store: "6827580311",
       platforms: ["iPhone", "iPad", "Mac", "Apple TV"],
-      store: "https://apps.apple.com/tr/app/iptv-premium-live-tv-player/id6827580311",
-      links: [["Destek", "https://tarikcinetci.github.io/iptvpremium/"], ["Gizlilik", "https://tarikcinetci.github.io/iptvpremium/privacy.html"]]
+      tag:  { tr: "Eğlence", en: "Entertainment", ja: "エンターテインメント", ko: "엔터테인먼트", zh: "娱乐" },
+      desc: {
+        tr: "Kendi IPTV aboneliğindeki canlı kanallar, filmler ve dizilere sinematik bir his katan şık ve hızlı oynatıcı.",
+        en: "A sleek, fast player that gives the live channels, movies and series from your own IPTV subscription a true cinematic feel.",
+        ja: "ご自身のIPTVサブスクリプションのライブチャンネル、映画、シリーズを映画館のような体験で楽しめる、洗練された高速プレーヤー。",
+        ko: "내 IPTV 구독의 라이브 채널, 영화, 시리즈를 영화관처럼 즐길 수 있는 세련되고 빠른 플레이어.",
+        zh: "一款时尚、快速的播放器，让你自己的 IPTV 订阅中的直播频道、电影和剧集拥有影院般的观感。"
+      },
+      links: [["support", "https://tarikcinetci.github.io/iptvpremium/"], ["privacy", "https://tarikcinetci.github.io/iptvpremium/privacy.html"]]
     },
     {
-      name: "Subs: Abonelik Takibi",
-      tag: "Finans",
+      name: "Subs",
       accent: "#6fd6c4",
       icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ee/8a/10/ee8a1098-645d-298f-972d-da871d1cac64/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
-      desc: "Tüm aboneliklerin ve faturaların tek yerde. Ne zaman, neye, ne kadar ödediğini her an bil; hiçbir ödemeyi kaçırma.",
+      store: "6824499612",
       platforms: ["iPhone", "iPad"],
-      store: "https://apps.apple.com/tr/app/subs-abonelik-takibi/id6824499612",
-      links: [["Destek", "https://tarikcinetci.github.io/"], ["Gizlilik", "https://tarikcinetci.github.io/gizlilik.html"]]
+      tag:  { tr: "Finans", en: "Finance", ja: "ファイナンス", ko: "금융", zh: "财务" },
+      desc: {
+        tr: "Tüm aboneliklerin ve faturaların tek yerde. Ne zaman, neye, ne kadar ödediğini her an bil; hiçbir ödemeyi kaçırma.",
+        en: "All your subscriptions and bills in one place. Always know what you pay, when and how much — and never miss a payment.",
+        ja: "すべてのサブスクと請求をひとつの場所に。いつ、何に、いくら払っているかがひと目でわかり、支払いを忘れません。",
+        ko: "모든 구독과 청구서를 한곳에서. 언제, 무엇에, 얼마를 내는지 한눈에 파악하고 결제를 놓치지 마세요.",
+        zh: "所有订阅和账单集中一处。随时了解何时、为何、支付多少，不再错过任何一笔付款。"
+      },
+      links: [["support", "https://tarikcinetci.github.io/"], ["privacy", "https://tarikcinetci.github.io/gizlilik.html"]]
     },
     {
       name: "TSM Makam&Usul",
-      tag: "Müzik",
       accent: "#e9c58a",
       icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1f/dd/76/1fdd76c5-b23f-da4a-4e9b-c8059b240635/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
-      desc: "Türk müziği öğrencileri ve icracıları için çalışma uygulaması. Usulleri vur, makamları koma koma dinle, sazını perde perde akort et.",
+      store: "6826855998",
       platforms: ["iPhone", "iPad"],
-      store: "https://apps.apple.com/tr/app/tsm-makam-usul/id6826855998",
-      links: [["Destek", "https://tarikcinetci.github.io/makamusul/destek.html"], ["Gizlilik", "https://tarikcinetci.github.io/makamusul/gizlilik.html"]]
+      tag:  { tr: "Müzik", en: "Music", ja: "ミュージック", ko: "음악", zh: "音乐" },
+      desc: {
+        tr: "Türk müziği öğrencileri ve icracıları için çalışma uygulaması. Usulleri vur, makamları koma koma dinle, sazını perde perde akort et.",
+        en: "A practice companion for students and performers of Turkish classical music. Tap out usul rhythms, hear makams comma by comma, and tune your instrument fret by fret.",
+        ja: "トルコ古典音楽を学ぶ人・演奏する人のための練習アプリ。ウスール（リズム周期）を刻み、マカーム（旋法）を微分音まで聴き、楽器をフレットごとにチューニング。",
+        ko: "터키 고전음악을 배우고 연주하는 이들을 위한 연습 앱. 우술(리듬 주기)을 치고, 마캄(선법)을 미분음 단위로 듣고, 악기를 프렛마다 조율하세요.",
+        zh: "为土耳其古典音乐学习者与演奏者打造的练习应用。敲击乌苏尔节奏、以微分音聆听玛卡姆调式，并逐品为乐器调音。"
+      },
+      links: [["support", "https://tarikcinetci.github.io/makamusul/destek.html"], ["privacy", "https://tarikcinetci.github.io/makamusul/gizlilik.html"]]
     },
     {
       name: "Study Program",
-      tag: "Eğitim",
       accent: "#7ab8ff",
       icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/21/bf/ef/21bfef4b-acdf-aa6b-9222-13128fa3f3bd/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
-      desc: "Akademik haftanı net ve kullanımı kolay bir ders programıyla düzenle. Ders, saat, hoca ve derslik bilgileri bir arada.",
+      store: "6819027705",
       platforms: ["iPhone", "iPad"],
-      store: "https://apps.apple.com/tr/app/study-program/id6819027705",
-      links: [["Destek", "https://tarikcinetci.github.io/studyprogram/"], ["Gizlilik", "https://tarikcinetci.github.io/studyprogram/privacy.html"]]
+      tag:  { tr: "Eğitim", en: "Education", ja: "教育", ko: "교육", zh: "教育" },
+      desc: {
+        tr: "Akademik haftanı net ve kullanımı kolay bir ders programıyla düzenle. Ders, saat, hoca ve derslik bilgileri bir arada.",
+        en: "Organize your academic week with a clear, easy-to-use class schedule. Courses, times, instructors and rooms — all together.",
+        ja: "見やすく使いやすい時間割で、1週間の授業を整理。科目、時間、担当教員、教室をまとめて管理できます。",
+        ko: "보기 쉽고 간편한 시간표로 한 주의 수업을 정리하세요. 과목, 시간, 교수, 강의실 정보를 한 번에.",
+        zh: "用清晰易用的课程表安排你的学习周。课程、时间、老师和教室信息一目了然。"
+      },
+      links: [["support", "https://tarikcinetci.github.io/studyprogram/"], ["privacy", "https://tarikcinetci.github.io/studyprogram/privacy.html"]]
     },
     {
       name: "Cozy Cat Focus",
-      tag: "Odak",
       accent: "#ffb38a",
       icon: "https://tarikcinetci.github.io/cozy-cat-focus-site/icon.png",
-      desc: "Sevimli bir kediyle rahat odaklanma seansları. Çalış, mola ver, kedin de seninle birlikte dinlensin.",
+      store: "",           // yayınlanınca App Store id'sini buraya yaz
       platforms: ["iPhone", "Android"],
-      store: "",           // yayınlanınca mağaza linkini buraya yaz
-      links: [["Web sitesi", "https://tarikcinetci.github.io/cozy-cat-focus-site/"]]
+      tag:  { tr: "Odak", en: "Focus", ja: "集中", ko: "집중", zh: "专注" },
+      desc: {
+        tr: "Sevimli bir kediyle rahat odaklanma seansları. Çalış, mola ver, kedin de seninle birlikte dinlensin.",
+        en: "Cozy focus sessions with an adorable cat. Work, take a break — and your cat rests right along with you.",
+        ja: "かわいい猫と一緒に、心地よい集中タイム。作業して、休憩して。猫もあなたと一緒にひと休み。",
+        ko: "귀여운 고양이와 함께하는 포근한 집중 시간. 일하고, 쉬고, 고양이도 당신과 함께 쉬어요.",
+        zh: "和可爱的猫咪一起享受惬意的专注时光。工作、休息，猫咪也陪你一起放松。"
+      },
+      links: [["website", "https://tarikcinetci.github.io/cozy-cat-focus-site/"]]
     }
   ];
   /* =========================================================================== */
 
+  const LANGS = Object.keys(UI);
+  const HTML_LANG = { tr: "tr", en: "en", ja: "ja", ko: "ko", zh: "zh-Hans" };
+  const STORE_CC = { tr: "tr", en: "us", ja: "jp", ko: "kr", zh: "cn" };
+
   const appleSvg = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.77-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.55.02-2.97.9-3.77 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.51 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.1 5.86c.63-.77 1.06-1.83.94-2.9-.91.04-2.02.61-2.67 1.37-.58.68-1.1 1.77-.96 2.81 1.02.08 2.06-.52 2.69-1.28z"/></svg>';
   const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-  const grid = document.getElementById("grid");
-  grid.innerHTML = apps.map(a => `
-    <article class="app" style="--accent:${esc(a.accent)}">
-      <div class="app-head">
-        <img src="${esc(a.icon)}" alt="${esc(a.name)} ikonu" loading="lazy" width="72" height="72">
-        <div><h3>${esc(a.name)}</h3><span class="tag">${esc(a.tag)}</span></div>
-      </div>
-      <p class="desc">${esc(a.desc)}</p>
-      <div class="platforms">${a.platforms.map(p => `<span>${esc(p)}</span>`).join("")}</div>
-      <div class="actions">
-        ${a.store
-          ? `<a class="store" href="${esc(a.store)}" target="_blank" rel="noopener">${appleSvg}<span class="t"><small>İndir</small>App Store</span></a>`
-          : `<span class="soon">Yakında</span>`}
-        ${a.links.map(([t, u]) => `<a class="ghost" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("")}
-      </div>
-    </article>`).join("");
+  function pickInitialLang() {
+    const q = new URLSearchParams(location.search).get("lang");
+    if (q && UI[q]) return q;
+    try { const s = localStorage.getItem("lang"); if (s && UI[s]) return s; } catch (e) {}
+    for (const l of (navigator.languages || [navigator.language || ""])) {
+      const base = String(l).toLowerCase().slice(0, 2);
+      if (UI[base]) return base;
+    }
+    return "en";
+  }
 
-  document.getElementById("stat-apps").textContent = apps.filter(a => a.store).length;
-  document.getElementById("year").textContent = new Date().getFullYear();
+  function render(lang) {
+    const t = UI[lang];
+    document.documentElement.lang = HTML_LANG[lang];
+    document.title = t.title;
+    document.querySelector('meta[name="description"]').content = t.meta;
+    document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t[el.dataset.i18n]);
+    document.querySelectorAll("[data-i18n-html]").forEach(el => el.innerHTML = t[el.dataset.i18nHtml]);
+    document.getElementById("lang-select").value = lang;
+    const cc = STORE_CC[lang];
+    document.getElementById("dev-link").href = `https://apps.apple.com/${cc}/developer/tarik-cinetci/id6819027707`;
 
-  // kartlar görününce yumuşakça belirsin
+    const grid = document.getElementById("grid");
+    grid.innerHTML = apps.map(a => `
+      <article class="app in" style="--accent:${esc(a.accent)}">
+        <div class="app-head">
+          <img src="${esc(a.icon)}" alt="${esc(a.name)} ${esc(t.icon)}" loading="lazy" width="72" height="72">
+          <div><h3>${esc(a.name)}</h3><span class="tag">${esc(a.tag[lang] || a.tag.en)}</span></div>
+        </div>
+        <p class="desc">${esc(a.desc[lang] || a.desc.en)}</p>
+        <div class="platforms">${a.platforms.map(p => `<span>${esc(p)}</span>`).join("")}</div>
+        <div class="actions">
+          ${a.store
+            ? `<a class="store" href="https://apps.apple.com/${cc}/app/id${esc(a.store)}" target="_blank" rel="noopener">${appleSvg}<span class="t"><small>${esc(t.download)}</small>App Store</span></a>`
+            : `<span class="soon">${esc(t.soon)}</span>`}
+          ${a.links.map(([k, u]) => `<a class="ghost" href="${esc(u)}" target="_blank" rel="noopener">${esc(t[k] || k)}</a>`).join("")}
+        </div>
+      </article>`).join("");
+  }
+
+  let current = pickInitialLang();
+  render(current);
+
+  // ilk açılışta kartlar yumuşakça belirsin
+  document.querySelectorAll(".app").forEach((el, i) => {
+    el.classList.remove("in");
+    el.style.transitionDelay = (i % 3) * 80 + "ms";
+  });
   const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
   }), { threshold: .12 }) : null;
-  document.querySelectorAll(".app").forEach((el, i) => {
-    el.style.transitionDelay = (i % 3) * 80 + "ms";
-    io ? io.observe(el) : el.classList.add("in");
+  document.querySelectorAll(".app").forEach(el => io ? io.observe(el) : el.classList.add("in"));
+
+  document.getElementById("lang-select").addEventListener("change", e => {
+    current = e.target.value;
+    render(current);
+    try { localStorage.setItem("lang", current); } catch (err) {}
+    const url = new URL(location.href);
+    url.searchParams.set("lang", current);
+    history.replaceState(null, "", url);
   });
+
+  document.getElementById("stat-apps").textContent = apps.filter(a => a.store).length;
+  document.getElementById("year").textContent = new Date().getFullYear();
 
   // yıldızlar
   const st = document.getElementById("stars");
